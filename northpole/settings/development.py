@@ -39,10 +39,10 @@ MEDIA_URL = '/media/'
 
 LOCAL = True
 
-LOGGING['loggers'].update({
-        'django': {
-            'handlers': ['console'],
-            'level': 'INFO',
-        },
-    },
-)
+# LOGGING['loggers'].update({
+#         'django': {
+#             'handlers': ['console'],
+#             'level': 'INFO',
+#         },
+#     },
+# )

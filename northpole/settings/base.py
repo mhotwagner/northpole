@@ -42,6 +42,8 @@ INSTALLED_APPS = [
 
     'django_extensions',
     'rest_framework',
+
+    'apps.santa'
 ]
 
 MIDDLEWARE = [
@@ -121,6 +123,12 @@ LOGGING = {
         'console': {
             'class': 'logging.StreamHandler',
             'stream': sys.stdout,
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
         },
     },
 }
