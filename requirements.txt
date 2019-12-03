@@ -1,0 +1,13 @@
+Django
+django-debug-toolbar
+django-extensions
+djangorestframework
+
+gunicorn
+
+ipdb
+ipython
+
+psycopg2-binary
+python-dotenv
+pyyaml
