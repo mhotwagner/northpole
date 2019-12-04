@@ -18,13 +18,16 @@ t test:
 
 # Docker commands
 dm dockermigrate:
-	DJANGO_SETTINGS_MODULE=northpole.settings.development_docker python3 manage.py migrate
+	DJANGO_SETTINGS_MODULE=northpole.settings.docker_development python3 manage.py migrate
+
+dcsu dockercreatesuperuser:
+	DJANGO_SETTINGS_MODULE=northpole.settings.docker_development python3 manage.py createsuperuser
 
 df dockerfixtures:
-	DJANGO_SETTINGS_MODULE=northpole.settings.development_docker python3 manage.py loaddata northpole/fixtures
+	DJANGO_SETTINGS_MODULE=northpole.settings.docker_development python3 manage.py loaddata northpole/fixtures
 
 dsh dockershell:
-	DJANGO_SETTINGS_MODULE=northpole.settings.development_docker python3 manage.py shell_plus
+	DJANGO_SETTINGS_MODULE=northpole.settings.docker_development python3 manage.py shell_plus
 
 collectstatic:
-	 DJANGO_SETTINGS_MODULE=northpole.settings.development_docker python3 manage.py collectstatic
+	 DJANGO_SETTINGS_MODULE=northpole.settings.docker_development python3 manage.py collectstatic

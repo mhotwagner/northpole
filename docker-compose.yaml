@@ -1,0 +1,66 @@
+version: '3'
+services:
+  app:
+    build: .
+    restart: on-failure
+    stdin_open: true
+    tty: true
+    environment:
+      - DJANGO_SETTINGS_MODULE=northpole.settings.docker_development
+      - POSTGRES_HOST=data
+      - POSTGRES_USER=northpole_user
+      - POSTGRES_PASSWORD=insecure
+      - POSTGRES_DB=northpole-docker-development
+      - COLLECT_STATIC=1
+      - LOAD_FIXTURES
+    volumes:
+      - .:/app
+      - static_volume:/app/static
+      - media_volume:/app/media
+    networks:
+      - nginx_network
+      - data_network
+    links:
+      - data
+    depends_on:
+      - data
+    command: ./start.sh
+
+  data:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_HOST=data
+      - POSTGRES_USER=northpole_user
+      - POSTGRES_PASSWORD=insecure
+      - POSTGRES_DB=northpole-docker-development
+    volumes:
+      - data_volume:/var/lib/postgresql/data
+    networks:
+      - data_network
+
+  nginx:
+    image: nginx:1.13
+    ports:
+      - "8000:80"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - static_volume:/app/static
+      - media_volume:/app/media
+    networks:
+      - nginx_network
+    depends_on:
+      - app
+
+volumes:
+  data_volume:
+  static_volume:
+  media_volume:
+
+networks:
+  nginx_network:
+    driver: bridge
+  data_network:
+    driver: bridge
