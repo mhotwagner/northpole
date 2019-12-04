@@ -1,0 +1,49 @@
+<!-- chat/templates/chat/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Data Test</title>
+</head>
+<body style="text-align: center">
+    Enter Data<br/>
+    <input id="data-input" type="text" size="100"/><br/>
+    <input id="data-submit" type="button" value="Send"/>
+    <br/>
+
+    <textarea rows="10" cols="100" id="data-log"></textarea>
+
+    <script>
+        const dataSocket = new WebSocket(
+            'ws://' + window.location.host + '/ws/santa/'
+        );
+
+        dataSocket.onMessage = function(e) {
+            const dataBlob = JSON.parse(e.data);
+            const data = dataBlob['data'];
+            document.querySelector('#data-log').value += (data + '\n');
+        };
+
+        dataSocket.onClose = function(e) {
+            console.error('[ERROR] Data socket closed unexpectedly');
+        };
+
+        document.querySelector('#data-input').focus();
+        document.querySelector('#data-input').onkeyup = function(e) {
+            if (e.keyCode === 13) {  // enter, return
+                document.querySelector('#data-submit').click();
+            }
+        };
+
+        document.querySelector('#data-submit').onclick = function(e) {
+            const dataInputDom = document.querySelector('#data-input');
+            const data = dataInputDom.value;
+            dataSocket.send(JSON.stringify({
+                'data': data
+            }));
+
+            dataInputDom.value = '';
+        };
+    </script>
+</body>
+</html>
