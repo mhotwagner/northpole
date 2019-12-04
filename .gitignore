@@ -105,3 +105,8 @@ venv.bak/
 
 # pycharm
 .idea/
+
+
+## DJANGO
+# static directory
+static/
