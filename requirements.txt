@@ -1,3 +1,5 @@
+channels
+
 Django
 django-debug-toolbar
 django-extensions
@@ -9,5 +11,6 @@ ipdb
 ipython
 
 psycopg2-binary
+pyreadline
 python-dotenv
 pyyaml

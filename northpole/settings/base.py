@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'channels',
     'django_extensions',
     'rest_framework',
 
@@ -132,3 +133,6 @@ LOGGING = {
         },
     },
 }
+
+# Channels!
+ASGI_APPLICATION = 'northpole.routing.application'
