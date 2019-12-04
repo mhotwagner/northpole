@@ -28,13 +28,13 @@ AUTH_PASSWORD_VALIDATORS = []
 
 MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware']
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static')
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static_source'),
+    os.path.join(BASE_DIR, '..', 'static_source'),
 )
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, '..' 'media')
 MEDIA_URL = '/media/'
 
 LOCAL = True
