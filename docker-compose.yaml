@@ -11,7 +11,8 @@ services:
       - POSTGRES_USER=northpole_user
       - POSTGRES_PASSWORD=insecure
       - POSTGRES_DB=northpole-docker-development
-      - COLLECT_STATIC=1
+      - REDIS_HOST=redis
+      - COLLECT_STATIC
       - LOAD_FIXTURES
     volumes:
       - .:/django
@@ -48,7 +49,7 @@ services:
     restart: always
     image: redis:latest
     ports:
-      - "6380:6379"
+      - "6379:6379"
     volumes:
       - redis_volume:/data
     networks:
