@@ -1,5 +1,6 @@
 channels
 channels_redis
+daphne
 
 Django
 django-debug-toolbar
