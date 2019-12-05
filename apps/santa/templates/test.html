@@ -15,17 +15,23 @@
 
     <script>
         const dataSocket = new WebSocket(
-            'ws://' + window.location.host + '/ws/santa/'
+            'ws://0.0.0.0:8000/ws/santa/'
         );
 
-        dataSocket.onMessage = function(e) {
+        dataSocket.onmessage = function(e) {
+            console.log('Data received!');
             const dataBlob = JSON.parse(e.data);
             const data = dataBlob['data'];
             document.querySelector('#data-log').value += (data + '\n');
         };
 
-        dataSocket.onClose = function(e) {
+        dataSocket.onerror = function(e) {
+            console.log('[ERROR] ' + e)
+        };
+
+        dataSocket.onclose = function(e) {
             console.error('[ERROR] Data socket closed unexpectedly');
+            console.log(e);
         };
 
         document.querySelector('#data-input').focus();
@@ -38,6 +44,7 @@
         document.querySelector('#data-submit').onclick = function(e) {
             const dataInputDom = document.querySelector('#data-input');
             const data = dataInputDom.value;
+            console.log('About to send the data!');
             dataSocket.send(JSON.stringify({
                 'data': data
             }));
