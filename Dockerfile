@@ -14,7 +14,8 @@ RUN apk --no-cache add \
     postgresql-dev \
     libffi-dev \
     build-base \
-    gettext
+    gettext \
+    zsh
 
 RUN apk add libgit2-dev --update-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/main
 

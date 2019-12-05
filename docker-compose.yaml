@@ -1,32 +1,35 @@
 version: '3'
 services:
-  app:
+  django:
     build: .
     restart: on-failure
     stdin_open: true
     tty: true
     environment:
       - DJANGO_SETTINGS_MODULE=northpole.settings.docker_development
-      - POSTGRES_HOST=data
+      - POSTGRES_HOST=postgres
       - POSTGRES_USER=northpole_user
       - POSTGRES_PASSWORD=insecure
       - POSTGRES_DB=northpole-docker-development
       - COLLECT_STATIC=1
       - LOAD_FIXTURES
     volumes:
-      - .:/app
-      - static_volume:/app/static
-      - media_volume:/app/media
+      - .:/django
+      - static_volume:/django/static
+      - media_volume:/django/media
     networks:
       - nginx_network
-      - data_network
+      - postgres_network
+      - redis_network
     links:
-      - data
+      - postgres
+      - redis
     depends_on:
-      - data
+      - postgres
+      - redis
     command: ./start.sh
 
-  data:
+  postgres:
     image: postgres
     restart: always
     ports:
@@ -37,9 +40,19 @@ services:
       - POSTGRES_PASSWORD=insecure
       - POSTGRES_DB=northpole-docker-development
     volumes:
-      - data_volume:/var/lib/postgresql/data
+      - postgres_volume:/var/lib/postgresql/data
     networks:
-      - data_network
+      - postgres_network
+
+  redis:
+    restart: always
+    image: redis:latest
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis_volume:/data
+    networks:
+      - redis_network
 
   nginx:
     image: nginx:1.13
@@ -47,20 +60,23 @@ services:
       - "8000:80"
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
-      - static_volume:/app/static
-      - media_volume:/app/media
+      - static_volume:/django/static
+      - media_volume:/django/media
     networks:
       - nginx_network
     depends_on:
-      - app
+      - django
 
 volumes:
-  data_volume:
+  postgres_volume:
   static_volume:
   media_volume:
+  redis_volume:
 
 networks:
-  nginx_network:
+  postgres_network:
     driver: bridge
-  data_network:
+  redis_network:
+    driver: bridge
+  nginx_network:
     driver: bridge
