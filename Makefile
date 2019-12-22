@@ -16,7 +16,7 @@ sh shell:
 t test:
 	DJANGO_SETTINGS_MODULE=northpole.settings.testing python manage.py test
 
-# Docker commands
+# Docker directives
 dm dockermigrate:
 	DJANGO_SETTINGS_MODULE=northpole.settings.docker_development python3 manage.py migrate
 
@@ -30,4 +30,8 @@ dsh dockershell:
 	DJANGO_SETTINGS_MODULE=northpole.settings.docker_development python3 manage.py shell_plus
 
 collectstatic:
-	 DJANGO_SETTINGS_MODULE=northpole.settings.docker_development python3 manage.py collectstatic
+	DJANGO_SETTINGS_MODULE=northpole.settings.docker_development python3 manage.py collectstatic
+
+# Local staging directives
+lsm localstagemigrate:
+	DJANGO_SETTINGS_MODULE=northpole.settings.local_staging python manage.py migrate

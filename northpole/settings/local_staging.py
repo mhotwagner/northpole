@@ -1,7 +1,7 @@
 from .base import *
 
 from dotenv import load_dotenv
-load_dotenv(verbose=True)
+load_dotenv(dotenv_path='northpole/.staging.env', verbose=True)
 
 
 ALLOWED_HOSTS = ['*']
@@ -11,10 +11,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.getenv('POSTGRES_DB', 'northpole-local-staging'),
-        'USER': os.getenv('POSTGRES_USER', ''),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD', ''),
-        'HOST': os.getenv('POSTGRES_HOST', '0.0.0.0'),
+        'NAME': os.getenv('POSTGRES_DB', 'northpole-staging'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+        'HOST': os.getenv('POSTGRES_HOST'),
         'PORT': os.getenv('POSTGRES_PORT', '5432'),
     }
 }
