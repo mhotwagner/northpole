@@ -13,4 +13,4 @@ RUN pip3 install -r requirements.txt
 ENV PYTHONUNBUFFERED 1
 COPY . /northpole/
 
-RUN /northpole/start.sh
+CMD /northpole/start.sh
