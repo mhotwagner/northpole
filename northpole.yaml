@@ -18,21 +18,27 @@ spec:
         env:
           - name: DJANGO_SETTINGS_MODULE
             value: northpole.settings.staging
+          - name: POSTGRES_HOST
+            valueFrom:
+              secretKeyRef:
+                name: staging-db
+                key: POSTGRES_HOST
           - name: POSTGRES_DB
             valueFrom:
               secretKeyRef:
                 name: staging-db
                 key: POSTGRES_DB
           - name: POSTGRES_USER
-              valueFrom:
-                secretKeyRef:
-                  name: staging-db
-                  key: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: staging-db
+                key: POSTGRES_USER
           - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: staging-db
-                  key: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: staging-db
+                key: POSTGRES_PASSWORD
+
         # This setting makes nodes pull the docker image every time before
         # starting the pod. This is useful when debugging, but should be turned
         # off in production.
