@@ -1,10 +1,6 @@
 #!/bin/sh
 
-echo "Waiting for Postgres to come online..."
-sleep 3
-echo "Postgres up"
-
-echo "Migrating"
+echo "Migrating database"
 python3 manage.py migrate
 
 #if [ "$LOAD_FIXTURES" = "True" ] || [ "$LOAD_FIXTURES" = "true" ] || [ "$LOAD_FIXTURES" = "1" ]
