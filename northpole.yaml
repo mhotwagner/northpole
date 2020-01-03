@@ -16,6 +16,8 @@ spec:
         # Replace  with your project ID or use `make template`
         image: gcr.io/northpole/northpole
         env:
+          - name: DJANGO_SETTINGS_MODULE
+            value: northpole.settings.staging
           - name: POSTGRES_DB
             valueFrom:
               secretKeyRef:
