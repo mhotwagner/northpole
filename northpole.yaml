@@ -15,12 +15,6 @@ spec:
       - name: northpole-app
         # Replace  with your project ID or use `make template`
         image: gcr.io/northpole/northpole
-        # This setting makes nodes pull the docker image every time before
-        # starting the pod. This is useful when debugging, but should be turned
-        # off in production.
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 8080
         env:
           - name: POSTGRES_DB
             valueFrom:
@@ -37,6 +31,12 @@ spec:
                 secretKeyRef:
                   name: staging-db
                   key: POSTGRES_PASSWORD
+        # This setting makes nodes pull the docker image every time before
+        # starting the pod. This is useful when debugging, but should be turned
+        # off in production.
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
 
       # [START volumes]
       volumes:
