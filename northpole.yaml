@@ -12,7 +12,7 @@ spec:
         app: northpole
     spec:
       containers:
-      - name: northpole-app
+      - name: northpole
         # Replace  with your project ID or use `make template`
         image: gcr.io/northpole/northpole
         env:
