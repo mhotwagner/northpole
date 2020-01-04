@@ -44,7 +44,7 @@ spec:
         # off in production.
         imagePullPolicy: Always
         ports:
-        - containerPort: 8080
+        - containerPort: 8000
 
       # [START volumes]
       volumes:
@@ -74,7 +74,7 @@ spec:
   type: LoadBalancer
   ports:
   - port: 80
-    targetPort: 8080
+    targetPort: 8000
   selector:
     app: northpole
 # [END service]
