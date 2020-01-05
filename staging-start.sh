@@ -1,5 +1,11 @@
 #!/bin/sh
 
+echo "****************"
+echo "** NORTHPOLE **"
+echo "****************"
+echo ""
+echo "Starting stage server"
+
 echo "Migrating database"
 python3 manage.py migrate
 
@@ -25,4 +31,4 @@ echo
 echo "Starting server"
 #gunicorn -b 0.0.0.0:8000 northpole.wsgi:application --access-logfile /var/log/northpole-access.log --log-file -
 #daphne --port 8000 --access-log /var/log/northpole-access.log northpole.asgi:application
-python3 manage.py runserver 8000
+python3 manage.py runserver
