@@ -49,7 +49,7 @@ spec:
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.16
         command: ["/cloud_sql_proxy", "--dir=/cloudsql",
-                  "-instances=<your-cloudsql-connection-string>=tcp:5432",
+                  "-instances=northpole:us-east1:northpole-staging=tcp:5432",
                   "-credential_file=/secrets/cloudsql/credentials.json"]
         volumeMounts:
           - name: cloudsql-oauth-credentials
