@@ -46,13 +46,32 @@ spec:
         ports:
         - containerPort: 8000
 
-      # [START volumes]
+      - name: cloudsql-proxy
+        image: gcr.io/cloudsql-docker/gce-proxy:1.16
+        command: ["/cloud_sql_proxy", "--dir=/cloudsql",
+                  "-instances=<your-cloudsql-connection-string>=tcp:5432",
+                  "-credential_file=/secrets/cloudsql/credentials.json"]
+        volumeMounts:
+          - name: cloudsql-oauth-credentials
+            mountPath: /secrets/cloudsql
+            readOnly: true
+          - name: ssl-certs
+            mountPath: /etc/ssl/certs
+          - name: cloudsql
+            mountPath: /cloudsql
+        # [END proxy_container]
+        # [START volumes]
       volumes:
+        - name: cloudsql-oauth-credentials
+          secret:
+            secretName: cloudsql-oauth-credentials
         - name: ssl-certs
           hostPath:
             path: /etc/ssl/certs
+        - name: cloudsql
+          emptyDir:
       # [END volumes]
-# [END kubernetes_deployment]
+          # [END kubernetes_deployment]
 
 ---
 
