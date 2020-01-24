@@ -41,6 +41,11 @@ spec:
               secretKeyRef:
                 name: staging-db
                 key: POSTGRES_PASSWORD
+          - name: NORTHPOLE_LOG_LEVEL
+            valueFrom:
+              secretKeyRef:
+                name: staging-settings
+                key: NORTHPOLE_LOG_LEVEL
 
       - name: cloudsql-proxy
         image: gcr.io/cloudsql-docker/gce-proxy:1.16
