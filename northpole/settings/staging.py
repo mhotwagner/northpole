@@ -30,10 +30,10 @@ MEDIA_URL = '/media/'
 LOGGING['loggers'] = {
     'django': {
         'handlers': ['file'],
-        'level': 'DEBUG',
+        'level': os.getenv('NORTHPOLE_LOG_LEVEL', 'DEBUG'),
     },
     'apps': {
         'handlers': ['file'],
-        'level': 'DEBUG',
+        'level': os.getenv('NORTHPOLE_LOG_LEVEL', 'DEBUG'),
     },
 }
