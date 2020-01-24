@@ -125,6 +125,10 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'stream': sys.stdout,
         },
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': '/var/log/northpole-app.log',
+        },
     },
     'loggers': {
         'django': {

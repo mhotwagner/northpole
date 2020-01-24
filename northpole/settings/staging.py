@@ -26,3 +26,14 @@ STATIC_URL = 'http://storage.googleapis.com/northpole-staging/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, '..' 'media')
 MEDIA_URL = '/media/'
+
+LOGGING['loggers'] = {
+    'django': {
+        'handlers': ['file'],
+        'level': 'DEBUG',
+    },
+    'apps': {
+        'handlers': ['file'],
+        'level': 'DEBUG',
+    },
+}
