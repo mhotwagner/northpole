@@ -101,9 +101,9 @@ kind: Ingress
 metadata:
   name: northpole-ingress-resource
   annotations:
-#    kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.org/websocket-services: "ws-service"
+    kubernetes.io/ingress.class: nginx
+#    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+#    nginx.org/websocket-services: "ws-service"
 spec:
   rules:
   - http:
@@ -112,8 +112,7 @@ spec:
         backend:
           serviceName: northpole
           servicePort: 8000
-      - path: /ws/
-        backend:
-          serviceName: "ws-service"
-          servicePort: 8000
-# [END ingress]
+#      - path: /ws/
+#        backend:
+#          serviceName: northpole
+#          servicePort: 8000
