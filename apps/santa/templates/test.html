@@ -21,9 +21,7 @@
 
 
     <script>
-        const dataSocket = new WebSocket(
-            'ws://0.0.0.0:8000/ws/santa/'
-        );
+        const dataSocket = new WebSocket('ws://' + window.location.host + ':8000/ws/santa/');
         let sliderDown = false;
 
         dataSocket.onmessage = function(e) {
