@@ -1,0 +1,4 @@
+get_pod() {
+  readonly podindex=${1:?"Must specify pod index"}
+  echo $(kubectl get pods -o json | jq --arg p $podindex '.items[$p|tonumber].metadata.name' -r) 
+}
