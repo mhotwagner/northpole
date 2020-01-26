@@ -39,11 +39,13 @@
         };
 
         dataSocket.onerror = function(e) {
+            theError = e;
             console.log('[ERROR] ' + e)
         };
 
         dataSocket.onclose = function(e) {
             console.error('[ERROR] Data socket closed unexpectedly');
+            theError = e;
             console.log(e);
         };
 

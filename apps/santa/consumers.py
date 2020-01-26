@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 class DataConsumer(WebsocketConsumer):
     def connect(self):
-        logger.info('Attempting the socket connection!')
+        logger.info('[INFO] Attempting the socket connection!')
         self.group_name = 'ornaments'
 
         # Join group
@@ -17,6 +17,8 @@ class DataConsumer(WebsocketConsumer):
             self.group_name,
             self.channel_name
         )
+
+        logger.info('[INFO] Attempting')
 
         self.accept()
 
