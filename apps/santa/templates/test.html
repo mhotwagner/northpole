@@ -21,7 +21,7 @@
 
 
     <script>
-        const dataSocketUrl = 'ws://' + window.location.host + ':8000/ws/santa/';
+        const dataSocketUrl = 'ws://' + window.location.host + '/ws/santa/';
         console.log('[INFO] Connecting to ' + dataSocketUrl);
         const dataSocket = new WebSocket(dataSocketUrl);
         theSocket = dataSocket;
