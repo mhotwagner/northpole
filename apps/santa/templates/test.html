@@ -21,7 +21,11 @@
 
 
     <script>
-        const dataSocket = new WebSocket('ws://' + window.location.host + ':8000/ws/santa/');
+        const dataSocketUrl = 'ws://' + window.location.host + ':8000/ws/santa/';
+        console.log('[INFO] Connecting to ' + dataSocketUrl);
+        const dataSocket = new WebSocket(dataSocketUrl);
+        theSocket = dataSocket;
+        console.log(dataSocket);
         let sliderDown = false;
 
         dataSocket.onmessage = function(e) {
