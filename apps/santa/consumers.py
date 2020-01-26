@@ -13,12 +13,13 @@ class DataConsumer(WebsocketConsumer):
         self.group_name = 'ornaments'
 
         # Join group
-        async_to_sync(self.channel_layer.group_add)(
-            self.group_name,
-            self.channel_name
-        )
+        # async_to_sync(self.channel_layer.group_add)(
+        #     self.group_name,
+        #     self.channel_name
+        # )
+        self.channel_layer.group_add(self.group_name, self.channel_name)
 
-        logger.info('[INFO] Attempting')
+        logger.info('[INFO] Attempting to accept')
 
         self.accept()
 
