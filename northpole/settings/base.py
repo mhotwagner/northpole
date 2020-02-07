@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'rest_framework',
 
+    'apps.dashboard',
     'apps.ornaments',
     'apps.santa',
 ]
