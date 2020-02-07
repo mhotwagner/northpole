@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'rest_framework',
 
-    'apps.santa'
+    'apps.ornaments',
+    'apps.santa',
 ]
 
 MIDDLEWARE = [
