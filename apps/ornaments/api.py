@@ -3,6 +3,9 @@ from rest_framework import viewsets
 from rest_framework import mixins
 from rest_framework.response import Response
 
+import logging
+logger = logging.getLogger(__name__)
+
 from .models import OrnamentDevice
 from .serializers import OrnamentSerializer
 
@@ -17,6 +20,8 @@ class OrnamentViewSet(viewsets.GenericViewSet):
 
     def retrieve(self, request, *args, **kwargs):
         instance, created = self.get_or_create_object()
+        if created:
+            logger.info(f'[INFO] Created {instance}')
         serializer = self.get_serializer(instance)
         return Response(serializer.data,
                         status=201 if created else 200)
