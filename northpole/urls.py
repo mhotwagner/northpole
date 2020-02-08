@@ -21,4 +21,6 @@ from apps.santa import urls as santa_urls
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('', include('apps.santa.urls'), name='santa'),
+
+    path('api/', include('apps.ornaments.api_urls')),
 ]
