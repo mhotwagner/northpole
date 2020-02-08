@@ -12,3 +12,5 @@ RUN pip3 install -r requirements.txt
 # prep
 ENV PYTHONUNBUFFERED 1
 COPY . /northpole/
+
+CMD /northpole/staging-start.sh

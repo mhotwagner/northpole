@@ -4,33 +4,48 @@
 <head>
     <meta charset="utf-8"/>
     <title>Data Test</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 </head>
 <body style="text-align: center">
-    Enter Data<br/>
-    <input id="data-input" type="text" size="100"/><br/>
-    <input id="data-submit" type="button" value="Send"/>
-    <br/>
+    <div class="container">
+        Enter Data<br/>
+        <label for="formControlRange">Example Range input</label>
+        <input type="range" class="form-control-range" id="formControlRange">
+        <input id="data-input" type="text" size="100"/><br/>
+        <input id="data-submit" type="button" value="Send"/>
+        <br/>
+        <textarea rows="10" cols="100" id="data-log"></textarea>
+    </div>
 
-    <textarea rows="10" cols="100" id="data-log"></textarea>
 
     <script>
-        const dataSocket = new WebSocket(
-            'ws://0.0.0.0:8000/ws/santa/'
-        );
+        const dataSocketUrl = 'ws://' + window.location.host + '/ws/santa/';
+        console.log('[INFO] Connecting to ' + dataSocketUrl);
+        const dataSocket = new WebSocket(dataSocketUrl);
+        theSocket = dataSocket;
+        console.log(dataSocket);
+        let sliderDown = false;
 
         dataSocket.onmessage = function(e) {
             console.log('Data received!');
+            console.log(e);
             const dataBlob = JSON.parse(e.data);
             const data = dataBlob['data'];
-            document.querySelector('#data-log').value += (data + '\n');
+            if ('textData' in data) document.querySelector('#data-log').value += (data['textData'] + '\n');
+            if ('sliderData' in data && !sliderDown) document.querySelector('#formControlRange').value = data['sliderData'];
+
         };
 
         dataSocket.onerror = function(e) {
+            theError = e;
             console.log('[ERROR] ' + e)
         };
 
         dataSocket.onclose = function(e) {
             console.error('[ERROR] Data socket closed unexpectedly');
+            theError = e;
             console.log(e);
         };
 
@@ -46,11 +61,27 @@
             const data = dataInputDom.value;
             console.log('About to send the data!');
             dataSocket.send(JSON.stringify({
-                'data': data
+                data: { 'textData': data }
             }));
 
             dataInputDom.value = '';
         };
+
+        document.querySelector('#formControlRange').oninput = function(e) {
+            sliderDown = true;
+            const sliderDom = document.querySelector('#formControlRange');
+            const sliderData = sliderDom.value;
+            console.log('About to send the slider data!');
+            dataSocket.send(JSON.stringify({
+                data: { 'sliderData': sliderData }
+            }))
+        };
+        document.querySelector('#formControlRange').onmouseup = function(e) {
+            sliderDown = false;
+        }
     </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -11,7 +11,3 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
-DEV = False
-
-GUNICORN = True

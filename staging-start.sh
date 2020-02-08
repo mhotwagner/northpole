@@ -1,10 +1,12 @@
 #!/bin/sh
 
-echo "Waiting for Postgres to come online..."
-sleep 3
-echo "Postgres up"
+echo "****************"
+echo "** NORTHPOLE **"
+echo "****************"
+echo ""
+echo "Starting stage server"
 
-echo "Migrating"
+echo "Migrating database"
 python3 manage.py migrate
 
 #if [ "$LOAD_FIXTURES" = "True" ] || [ "$LOAD_FIXTURES" = "true" ] || [ "$LOAD_FIXTURES" = "1" ]
@@ -28,5 +30,5 @@ echo
 
 echo "Starting server"
 #gunicorn -b 0.0.0.0:8000 northpole.wsgi:application --access-logfile /var/log/northpole-access.log --log-file -
-daphne --port 8000 --access-log /var/log/northpole-access.log northpole.asgi:application
-#python3 manage.py runserver
+daphne --bind 0.0.0.0 --port 8000 --access-log /var/log/northpole-access.log northpole.asgi:application
+#python3 manage.py runserver 0.0.0.0:8080

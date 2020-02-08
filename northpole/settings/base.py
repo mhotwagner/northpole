@@ -44,7 +44,9 @@ INSTALLED_APPS = [
     'django_extensions',
     'rest_framework',
 
-    'apps.santa'
+    'apps.dashboard',
+    'apps.ornaments',
+    'apps.santa',
 ]
 
 MIDDLEWARE = [
@@ -144,7 +146,9 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [(os.getenv('REDIS_HOST', '0.0.0.0'), 6379)],
+            "hosts": [
+                (os.getenv('NORTHPOLE_REDIS_HOST', '0.0.0.0'), os.getenv('NORTHPOLE_REDIS_PORT', 6379)),
+            ],
         },
     },
 }
