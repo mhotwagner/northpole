@@ -1,7 +1,8 @@
-from django.urls import re_path
+from django.urls import path
 
-from .consumers import DataConsumer
+from .consumers import OrnamentDeviceConsumer, OrnamentControllerConsumer
 
 websocket_urlpatterns = [
-    re_path(r'ws/ornaments/$', DataConsumer),
+    path(r'ws/ornaments/controller/<str:mac_address>/', OrnamentControllerConsumer),
+    path(r'ws/ornaments/device/<str:mac_address>/', OrnamentDeviceConsumer),
 ]

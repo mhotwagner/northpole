@@ -4,5 +4,6 @@ from .views import test_view
 
 
 urlpatterns = [
-    path('test/', test_view),
+    path('ornaments/controller/<str:mac_address>/', test_view),
+    path('ornaments/device/<str:mac_address>/', test_view),
 ]
