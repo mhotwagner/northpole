@@ -38,7 +38,7 @@
             console.log(e);
             const dataBlob = JSON.parse(e.data);
             const data = dataBlob['data'];
-            if ('brightness') document.querySelector('body').style.opacity = data['brightness'];
+            if ('brightness') document.querySelector('body').style.opacity = (parseFloat(data['brightness'])/100).toString();
         };
 
         dataSocket.onerror = function(e) {
