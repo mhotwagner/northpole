@@ -23,27 +23,27 @@ class OrnamentConsumer(WebsocketConsumer):
 class OrnamentDeviceConsumer(OrnamentConsumer):
     """Consumer that will handle data communication with devices (ornaments)"""
     def connect(self):
-        logger.info(f'[INFO] Received connection request from {self.ornament}')
+        logger.info(f'[INFO] Received connection request from {self.mac_address}')
         async_to_sync(self.channel_layer.group_add)(
             self.mac_address,
             self.channel_name,
         )
         self.accept()
-        logger.info(f'[INFO] Connected to {self.ornament}')
+        logger.info(f'[INFO] Connected to {self.mac_address}')
 
     def disconnect(self, close_code):
         async_to_sync(self.channel_layer.group_discard)(
             self.mac_address,
             self.channel_name
         )
-        logger.info(f'[INFO] Disconnected from {self.ornament}')
+        logger.info(f'[INFO] Disconnected from {self.mac_address}')
 
     # Receive message from WebSocket
     def receive(self, text_data):
         data_json = json.loads(text_data)
         data = data_json['data']
 
-        logger.info(f'[INFO] Data received from {self.ornament}')
+        logger.info(f'[INFO] Data received from {self.mac_address}')
         logger.info(f'[INFO] {data}')
 
         async_to_sync(self.channel_layer.group_send)(
@@ -56,7 +56,7 @@ class OrnamentDeviceConsumer(OrnamentConsumer):
 
     # Receive message from room group
     def data(self, event):
-        logger.info(f'[INFO] Data received from group {self.mac_address} by {self.ornament}')
+        logger.info(f'[INFO] Data received from group {self.mac_address} by {self.mac_address}')
         data = event['data']
 
         # Send message to WebSocket
@@ -68,27 +68,27 @@ class OrnamentDeviceConsumer(OrnamentConsumer):
 class OrnamentControllerConsumer(OrnamentConsumer):
     """Consumer that will handle data communication with the controlers (apps, websites, etc)"""
     def connect(self):
-        logger.info(f'[INFO] Received connection request from {self.ornament} controller')
+        logger.info(f'[INFO] Received connection request from {self.mac_address} controller')
         async_to_sync(self.channel_layer.group_add)(
             self.mac_address,
             self.channel_name,
         )
         self.accept()
-        logger.info(f'[INFO] Connected to {self.ornament} controller')
+        logger.info(f'[INFO] Connected to {self.mac_address} controller')
 
     def disconnect(self, close_code):
         async_to_sync(self.channel_layer.group_discard)(
             self.mac_address,
             self.channel_name
         )
-        logger.info(f'[INFO] Disconnected from {self.ornament} controller')
+        logger.info(f'[INFO] Disconnected from {self.mac_address} controller')
 
     # Receive message from WebSocket
     def receive(self, text_data):
         data_json = json.loads(text_data)
         data = data_json['data']
 
-        logger.info(f'[INFO] Data received from {self.ornament} controller')
+        logger.info(f'[INFO] Data received from {self.mac_address} controller')
         logger.info(f'[INFO] {data}')
 
         async_to_sync(self.channel_layer.group_send)(
@@ -101,7 +101,7 @@ class OrnamentControllerConsumer(OrnamentConsumer):
 
     # Receive message from room group
     def data(self, event):
-        logger.info(f'[INFO] Data received from group {self.mac_address} controller by {self.ornament}')
+        logger.info(f'[INFO] Data received from group {self.mac_address} controller by {self.mac_address}')
         data = event['data']
 
         # Send message to WebSocket
