@@ -60,9 +60,7 @@ class OrnamentDeviceConsumer(OrnamentConsumer):
         data = event['data']
 
         # Send message to WebSocket
-        self.send(text_data=json.dumps({
-            'data': data
-        }))
+        self.send(text_data=json.dumps(data))
 
 
 class OrnamentControllerConsumer(OrnamentConsumer):
@@ -105,6 +103,4 @@ class OrnamentControllerConsumer(OrnamentConsumer):
         data = event['data']
 
         # Send message to WebSocket
-        self.send(text_data=json.dumps({
-            'data': data
-        }))
+        self.send(text_data=json.dumps(data))
