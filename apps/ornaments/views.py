@@ -1,6 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 
 import logging
+
+from apps.ornaments.models import OrnamentDevice
+
 logger = logging.getLogger(__name__)
 
 
@@ -24,7 +27,7 @@ def controller_view(request, mac_address):
 
 
 def controller_nickname_view(request, nickname):
-    ornament = get_object_or_404('apps.OrnamentDevice', nickname=nickname)
+    ornament = get_object_or_404(OrnamentDevice, nickname=nickname)
     context = {
         'mac_address': ornament.mac_address,
         'nickname': nickname,
