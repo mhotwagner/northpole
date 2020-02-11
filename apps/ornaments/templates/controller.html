@@ -98,7 +98,7 @@
         <div class="brightness">
             <h2>Brightness: <span id="brightnessDisplay">50</span>%</h2>
             <div class="brightnessSlider">
-              <input type="range" min="1" max="255" value="50" class="slider" id="brightness">
+              <input type="range" min="1" max="255" value="128" class="slider" id="brightness">
             </div>
         </div>
         <div class="color container-fluid">
@@ -158,7 +158,7 @@
             dataSocket.send(JSON.stringify({
                 data: { brightness: sliderData }
             }));
-            document.querySelector('#brightnessDisplay').innerHTML = sliderData;
+            document.querySelector('#brightnessDisplay').innerHTML = parseInt(100*sliderData/255);
         };
         document.querySelector('#brightness').onmouseup = function(e) {
             sliderDown = false;
