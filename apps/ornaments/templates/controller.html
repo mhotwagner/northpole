@@ -9,6 +9,7 @@
     <style>
         html, body {
             font-size: 16px;
+            font-family: Helvetica, sans-serif;
             text-align: center;
         }
 
@@ -71,13 +72,23 @@
             font-size: 30px;
         }
 
-        .xmas {
+        .buttons {
             margin-top: 1em;
             font-size: 2rem;
         }
-        .xmas button {
+        .buttons button {
+            margin: 0 0.5em;
+            width: 50px;
+            height: 50px;
+        }
+        .buttons #xmas {
             background-color: red;
             color: green;
+        }
+
+        .buttons #jmas {
+            background-color: blue;
+            color: white;
         }
     </style>
 
@@ -94,9 +105,14 @@
             <h2>Color: #<span id="colorDisplay">FFFFFF</span></h2>
             <input id="color" type="text"/>
         </div>
-        <div class="xmas container-fluid">
-            <button>
+        <div class="buttons container-fluid">
+            <button id="xmas">
                 <i class="fa fa-tree"></i>
+            </button>
+            <button id="jmas">
+                <strong>
+                    <span>&#10017;</span>
+                </strong>
             </button>
         </div>
     </div>
@@ -171,13 +187,23 @@
             document.querySelector('#colorDisplay').innerHTML = cString;
         });
 
-        $('.xmas button').on('click', function() {
+        $('#xmas').on('click', function() {
             dataSocket.send(JSON.stringify({
                 data: {
                     xmas: true,
                 }
             }));
         })
+
+        $('#jmas').on('click', function() {
+            dataSocket.send(JSON.stringify({
+                data: {
+                    jmas: true,
+                }
+            }));
+        })
+
+
 
     </script>
 </body>
