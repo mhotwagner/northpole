@@ -90,6 +90,11 @@
             background-color: blue;
             color: white;
         }
+
+        .button #emas {
+            background-color: #BDE8EF;
+            color: #FFD4E5;
+        }
     </style>
 
 </head>
@@ -113,6 +118,9 @@
                 <strong>
                     <span>&#10017;</span>
                 </strong>
+            </button>
+            <button id="emas">
+                <i class="fa fa-egg"></i>
             </button>
         </div>
     </div>
@@ -193,7 +201,7 @@
                     xmas: true,
                 }
             }));
-        })
+        });
 
         $('#jmas').on('click', function() {
             dataSocket.send(JSON.stringify({
@@ -201,8 +209,15 @@
                     jmas: true,
                 }
             }));
-        })
-
+        });
+        
+        $('#emas').on('click', function() {
+            dataSocket.send(JSON.stringify({
+                data: {
+                    emas: true,
+                }
+            }));
+        });
 
 
     </script>
