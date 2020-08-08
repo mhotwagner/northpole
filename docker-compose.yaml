@@ -5,6 +5,8 @@ services:
     restart: on-failure
     stdin_open: true
     tty: true
+    ports:
+      - "8000:8000"
     environment:
       - DJANGO_SETTINGS_MODULE=northpole.settings.docker_development
       - POSTGRES_HOST=postgres
@@ -12,12 +14,12 @@ services:
       - POSTGRES_PASSWORD=insecure
       - POSTGRES_DB=northpole-docker-development
       - REDIS_HOST=redis
-      - COLLECT_STATIC
+      - COLLECT_STATIC=1
       - LOAD_FIXTURES
     volumes:
       - .:/django
-      - static_volume:/django/static
-      - media_volume:/django/media
+      - static_volume:/cdn/static:rw
+      - media_volume:/cdn/media:rw
     networks:
       - nginx_network
       - postgres_network
@@ -58,11 +60,11 @@ services:
   nginx:
     image: nginx:1.13
     ports:
-      - "8000:80"
+      - "80:80"
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
-      - static_volume:/django/static
-      - media_volume:/django/media
+      - static_volume:/cdn/static
+      - media_volume:/cdn/media
     networks:
       - nginx_network
     depends_on:
