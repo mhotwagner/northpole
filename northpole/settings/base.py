@@ -147,7 +147,7 @@ CHANNEL_LAYERS = {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
             "hosts": [
-                (os.getenv('NORTHPOLE_REDIS_HOST', '0.0.0.0'), os.getenv('NORTHPOLE_REDIS_PORT', 6379)),
+                (os.getenv('NORTHPOLE_REDIS_HOST', 'redis'), os.getenv('NORTHPOLE_REDIS_PORT', 6379)),
             ],
         },
     },
