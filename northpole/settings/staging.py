@@ -1,20 +1,12 @@
 from .base import *
+import django_heroku
 
+
+django_heroku.settings(locals())
 
 ALLOWED_HOSTS = ['*']
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.getenv('POSTGRES_DB'),
-        'USER': os.getenv('POSTGRES_USER'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-        'HOST': os.getenv('POSTGRES_HOST', '0.0.0.0'),
-        'PORT': '5432',
-    }
-}
 
 STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static')
 
@@ -22,7 +14,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, '..', 'static_source'),
 )
 
-STATIC_URL = 'http://storage.googleapis.com/northpole-staging/static/'
+STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, '..' 'media')
 MEDIA_URL = '/media/'
@@ -40,5 +32,18 @@ LOGGING['loggers'] = {
     'apps': {
         'handlers': ['file'],
         'level': os.getenv('NORTHPOLE_LOG_LEVEL', 'DEBUG'),
+    },
+}
+
+# Channels!
+ASGI_APPLICATION = 'northpole.routing.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [
+                (os.getenv('REDIS_URL', 'redis'), os.getenv('NORTHPOLE_REDIS_PORT', 6379)),
+            ],
+        },
     },
 }
