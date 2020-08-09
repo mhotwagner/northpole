@@ -10,4 +10,4 @@ build:
     web: Dockerfile
 
 run:
-  web: ls -la && ./start.sh
+  web: ./staging-start.sh
