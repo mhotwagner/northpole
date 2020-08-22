@@ -6,7 +6,7 @@ setup:
       as: REDIS
 build:
   docker:
-    web: staging/Dockerfile
+    web: StagingDockerfile
   config:
     DJANGO_SETTINGS_MODULE: northpole.settings.docker_development
 run:
