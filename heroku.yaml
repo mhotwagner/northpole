@@ -10,4 +10,5 @@ build:
     web: Dockerfile
 
 run:
-  web: ./staging-start.sh
+  web:
+    command: ./staging-start.sh
