@@ -7,8 +7,8 @@ setup:
 
 build:
   docker:
-    web: Dockerfile
+    web: StagingDockerfile
 
 run:
   web:
-    command: staging-start.sh
+    command: gunicorn -b 0.0.0.0:8000 northpole.wsgi:application --access-logfile /var/log/northpole-access.log --log-file -
