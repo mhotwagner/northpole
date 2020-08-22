@@ -4,7 +4,7 @@ ARG DJANGO_SETTINGS_MODULE
 
 RUN mkdir /northpole
 WORKDIR /northpole
-COPY requirements.txt /northpole/
+COPY ./requirements.txt /northpole/
 
 RUN pip3 install --upgrade pip
 
