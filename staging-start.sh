@@ -29,6 +29,6 @@ echo "********************"
 echo
 
 echo "Starting server"
-gunicorn -b 0.0.0.0:8000 northpole.wsgi:application --access-logfile /var/log/northpole-access.log --log-file -
-#daphne --bind 0.0.0.0 --port 8000 --access-log /var/log/northpole-access.log northpole.asgi:application
+#gunicorn -b 0.0.0.0:8000 northpole.wsgi:application --access-logfile /var/log/northpole-access.log --log-file -
+daphne northpole.asgi:application --bind 0.0.0.0 --port $PORT --access-log /var/log/northpole-access.log -v2
 #python3 manage.py runserver 0.0.0.0:8080
