@@ -4,11 +4,8 @@ setup:
       as: DATABASE
     - plan: heroku-redis
       as: REDIS
-
 build:
   docker:
-    web: StagingDockerfile
-
+    web: staging/Dockerfile
 run:
-  web:
-    command: gunicorn -b 0.0.0.0:8000 northpole.wsgi:application --access-logfile /var/log/northpole-access.log --log-file -
+  web: env
