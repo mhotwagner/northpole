@@ -1,5 +1,7 @@
 FROM python:3
 
+ARG DJANGO_SETTINGS_MODULE
+
 RUN mkdir /northpole
 WORKDIR /northpole
 COPY requirements.txt /northpole/
@@ -12,6 +14,3 @@ RUN pip3 install -r requirements.txt
 
 ENV PYTHONUNBUFFERED 1
 COPY . /northpole/
-
-RUN python3 manage.py migrate
-RUN python3 manage.py collectstatic --clear --noinput

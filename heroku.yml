@@ -7,5 +7,7 @@ setup:
 build:
   docker:
     web: staging/Dockerfile
+  config:
+    DJANGO_SETTINGS_MODULE: northpole.settings.docker_development
 run:
-  web: env
+  web: /northpole/staging-start.sh
