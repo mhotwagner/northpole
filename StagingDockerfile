@@ -1,4 +1,4 @@
-FROM python:3
+FROM heroku/heroku:16
 
 ARG DJANGO_SETTINGS_MODULE
 
@@ -13,6 +13,7 @@ RUN pip3 install -r requirements.txt
 #RUN apk del -r python3-dev postgresql
 
 #Enable bash on heroku exec
+ADD ./.profile.d /app/.profile.d
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 ENV PYTHONUNBUFFERED 1
