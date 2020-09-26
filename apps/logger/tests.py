@@ -1,14 +1,19 @@
 from django.test import TestCase
 
 # Create your tests here.
+from .models import Log
+
+
 class LoggerTests(TestCase):
     def test_a_log_can_be_posted(self):
 
         self.assertEqual(Log.objects.count(), 0)
 
-        self.client.post(
-            '/api/logs',
-            {'message': 'Some test message'},
+        self.client.post('/api/logs/', {'message': 'Some test message'})
+
+        self.assertEqual(Log.objects.count(), 1)
+        self.assertEqual(
+            Log.objects.first().message,
+            'Some test message'
         )
 
-        Log.objects.get

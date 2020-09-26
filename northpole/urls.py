@@ -23,5 +23,6 @@ urlpatterns = [
     path('', include('apps.santa.urls'), name='santa'),
     path('', include('apps.ornaments.urls'), name='ornaments'),
 
+    path('api/', include('apps.logger.api_urls'), name='logger'),
     path('api/', include('apps.ornaments.api_urls')),
 ]
