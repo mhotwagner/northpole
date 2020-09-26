@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'apps.dashboard',
+    'apps.logger',
     'apps.ornaments',
     'apps.santa',
 ]
