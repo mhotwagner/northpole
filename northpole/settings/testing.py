@@ -28,3 +28,5 @@ STATICFILES_DIRS = (
 
 MEDIA_ROOT = os.path.join(BASE_DIR, '..' 'media')
 MEDIA_URL = '/media/'
+
+LOGGER_FILE_PATH = os.path.join(BASE_DIR, '..', 'test.log')

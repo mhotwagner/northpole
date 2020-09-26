@@ -13,7 +13,7 @@ services:
       - POSTGRES_USER=northpole_user
       - POSTGRES_PASSWORD=insecure
       - POSTGRES_DB=northpole-docker-development
-#      - REDIS_HOST=redis
+      - REDIS_HOST=redis
       - COLLECT_STATIC=1
       - LOAD_FIXTURES
     volumes:
