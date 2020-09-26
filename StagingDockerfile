@@ -15,5 +15,9 @@ RUN pip3 install -r requirements.txt
 #Enable bash on heroku exec
 #RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
+#Add logfile
+RUN mkdir /var/northpoler
+RUN touch /var/northpoler/logger.log
+
 ENV PYTHONUNBUFFERED 1
 COPY . /northpole/
