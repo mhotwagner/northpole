@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'apps.logger',
     'apps.ornaments',
     'apps.santa',
+    'apps.status',
 ]
 
 MIDDLEWARE = [
