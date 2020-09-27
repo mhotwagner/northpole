@@ -154,4 +154,4 @@ CHANNEL_LAYERS = {
     },
 }
 
-LOGGER_FILE_PATH = '/var/northpoler/logger.log'
+LOGGER_FILE_PATH = '/var/log/northpoler/logger.log'
