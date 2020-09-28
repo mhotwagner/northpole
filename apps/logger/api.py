@@ -36,4 +36,4 @@ class LogViewSet(viewsets.GenericViewSet):
             with open(settings.LOGGER_FILE_PATH, 'a+') as logfile:
                 logfile.write("\n" + request.data['message'])
             return Response({'id': log.id})
-        return Response({'message': 'Bad data'}, status=400)
+        return Response({'message': 'Bad data', 'errors': serializer.errors}, status=400)
