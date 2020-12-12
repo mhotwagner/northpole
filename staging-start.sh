@@ -15,8 +15,10 @@ python3 manage.py migrate
 #    python3 manage.py loaddata chatty_mason/fixtures
 #fi
 
-if [ "$COLLECT_STATIC" = "True" ] || [ "$COLLECT_STATIC" = "true" ] || [ "$COLLECT_STATIC" = "1" ]
+if [ "$COLLECT_STATIC" = "False" ] || [ "$COLLECT_STATIC" = "false" ] || [ "$COLLECT_STATIC" = "0" ]
 then
+    echo "Not collectng resources"
+else
     echo "Preparing static resources"
     python3 manage.py collectstatic --clear --noinput
 fi
