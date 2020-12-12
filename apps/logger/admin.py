@@ -7,7 +7,7 @@ from .models import Log
 
 @admin.register(Log)
 class LogAdmin(admin.ModelAdmin):
-    readonly_fields = (('id', 'created'),
+    readonly_fields = (('id'),
                        ('oranament'),
                        ('message'),)
 
