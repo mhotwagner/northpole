@@ -19,19 +19,21 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '..' 'media')
 MEDIA_URL = '/media/'
 
-LOGGING['handlers']['file'] = {
-    'class': 'logging.FileHandler',
-    'filename': '/var/log/northpole.log',
-}
-
-LOGGING['loggers'] = {
-    'django': {
-        'handlers': ['file'],
-        'level': os.getenv('NORTHPOLE_LOG_LEVEL', 'DEBUG'),
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': '/var/log/northpole.log',
+        }
     },
-    'apps': {
-        'handlers': ['file'],
-        'level': os.getenv('NORTHPOLE_LOG_LEVEL', 'DEBUG'),
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
     },
 }
 
