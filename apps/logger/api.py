@@ -1,11 +1,12 @@
 from django.conf import settings
-from django.http import Http404
 from rest_framework import viewsets, serializers
+from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
 import logging
 
 from .models import Log
+from ..ornaments.models import OrnamentDevice
 
 logger = logging.getLogger(__name__)
 
@@ -13,7 +14,7 @@ logger = logging.getLogger(__name__)
 class LogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Log
-        fields = ['ornament_mac_address', 'message']
+        fields = ['ornament', 'message']
 
 
 class LogViewSet(viewsets.GenericViewSet):
@@ -22,12 +23,14 @@ class LogViewSet(viewsets.GenericViewSet):
 
     @staticmethod
     def _get_log_data(raw_data: dict):
-        if 'ornament_mac_address' in raw_data.keys():
-            return {
-                'message': raw_data['message'],
-                'ornament_mac_address': raw_data['ornament_mac_address'].replace(':', '')
-            }
-        return {'message': raw_data['message']}
+        ornament_key = 'ornament_mac_address' if 'ornament_mac_address' in raw_data.keys() else 'ornament_id'
+        ornament_mac_address = raw_data[ornament_key].replace(':', '')
+        ornament = get_object_or_404(OrnamentDevice.objects.all(),
+                                     mac_address=ornament_mac_address)
+        return {
+            'message': raw_data['message'],
+            'ornament': ornament.id,
+        }
 
     def create(self, request):
         serializer = self.serializer_class(data=self._get_log_data(request.data))

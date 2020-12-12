@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 from django_extensions.db.models import TimeStampedModel
 
-from apps.ornaments.models import OrnamentDevice
+from ..ornaments.models import OrnamentDevice
 
 
 class Log(TimeStampedModel):

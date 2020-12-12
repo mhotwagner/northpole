@@ -2,11 +2,11 @@ from django.http import Http404
 from rest_framework import viewsets
 from rest_framework.response import Response
 
-import logging
-logger = logging.getLogger(__name__)
-
 from .models import OrnamentDevice
 from .serializers import OrnamentSerializer
+
+import logging
+logger = logging.getLogger(__name__)
 
 
 class OrnamentViewSet(viewsets.GenericViewSet):
