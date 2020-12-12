@@ -18,8 +18,8 @@ RUN pip3 install -r requirements.txt
 #Add logfile
 RUN touch -m 777 /var/log/northpoler.log
 
-#Django shit
-RUN ls -la
-
 ENV PYTHONUNBUFFERED 1
 COPY . /northpole/
+
+#Django shit
+RUN python3 manage.py collectstatic --clear --noinput
