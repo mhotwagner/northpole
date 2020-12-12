@@ -20,6 +20,3 @@ RUN touch -m 777 /var/log/northpoler.log
 
 ENV PYTHONUNBUFFERED 1
 COPY . /northpole/
-
-#Django shit
-RUN python3 manage.py collectstatic --clear --noinput
