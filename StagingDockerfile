@@ -16,7 +16,8 @@ RUN pip3 install -r requirements.txt
 #RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 #Add logfile
-RUN touch -m 777 /var/log/northpoler.log
+RUN mkdir -m 755 /var/log/northpoler
+RUN touch -m 777 /var/log/northpoler/logger.log
 
 ENV PYTHONUNBUFFERED 1
 COPY . /northpole/
