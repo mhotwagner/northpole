@@ -21,7 +21,7 @@ MEDIA_URL = '/media/'
 
 LOGGING['handlers']['file'] = {
     'class': 'logging.FileHandler',
-    'filename': '/var/log/northpole-app.log',
+    'filename': '/var/log/northpole.log',
 }
 
 LOGGING['loggers'] = {
