@@ -29,21 +29,20 @@ class OrnamentDeviceConsumer(OrnamentConsumer):
             self.channel_name,
         )
         self.accept()
-        logger.info(f'[INFO] Connected to {self.mac_address}')
+        logger.info(f'[INFO] Connected to {self.mac_address} device')
 
     def disconnect(self, close_code):
         async_to_sync(self.channel_layer.group_discard)(
             self.mac_address,
             self.channel_name
         )
-        logger.info(f'[INFO] Disconnected from {self.mac_address}')
+        logger.info(f'[INFO] Disconnected from {self.mac_address} device')
 
     # Receive message from WebSocket
     def receive(self, text_data):
-        data_json = json.loads(text_data)
-        data = data_json['data']
+        data = json.loads(text_data)['data']
 
-        logger.info(f'[INFO] Data received from {self.mac_address}')
+        logger.info(f'[INFO] Data received from {self.mac_address} device')
         logger.info(f'[INFO] {data}')
 
         async_to_sync(self.channel_layer.group_send)(
@@ -56,7 +55,7 @@ class OrnamentDeviceConsumer(OrnamentConsumer):
 
     # Receive message from room group
     def data(self, event):
-        logger.info(f'[INFO] Data received from group {self.mac_address} by {self.mac_address}')
+        logger.info(f'[INFO] Data received from group {self.mac_address} by {self.mac_address} device')
         data = event['data']
 
         # Send message to WebSocket
@@ -83,8 +82,7 @@ class OrnamentControllerConsumer(OrnamentConsumer):
 
     # Receive message from WebSocket
     def receive(self, text_data):
-        data_json = json.loads(text_data)
-        data = data_json['data']
+        data = json.loads(text_data)['data']
 
         logger.info(f'[INFO] Data received from {self.mac_address} controller')
         logger.info(f'[INFO] {data}')
@@ -99,7 +97,7 @@ class OrnamentControllerConsumer(OrnamentConsumer):
 
     # Receive message from room group
     def data(self, event):
-        logger.info(f'[INFO] Data received from group {self.mac_address} controller by {self.mac_address}')
+        logger.info(f'[INFO] Data received from group {self.mac_address} by {self.mac_address} controller')
         data = event['data']
 
         # Send message to WebSocket
