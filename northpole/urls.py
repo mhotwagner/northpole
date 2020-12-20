@@ -19,6 +19,7 @@ from django.urls import path, include
 from apps.santa import urls as santa_urls
 
 urlpatterns = [
+    path('grappelli/', include('grappelli.urls')),  # grappelli URLS
     path('admin/', admin.site.urls, name='admin'),
     path('', include('apps.santa.urls'), name='santa'),
     path('', include('apps.ornaments.urls'), name='ornaments'),
