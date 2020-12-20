@@ -28,7 +28,7 @@
 </head>
 <body>
     <script>
-        const dataSocketUrl = 'ws://' + window.location.host + '/ws/ornaments/device/{{ mac_address }}/';
+        const dataSocketUrl = 'wss://' + window.location.host + '/ws/ornaments/device/{{ mac_address }}/';
         console.log('[INFO] Connecting to ' + dataSocketUrl);
         const dataSocket = new WebSocket(dataSocketUrl);
         theSocket = dataSocket;
