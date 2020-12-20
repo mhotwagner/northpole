@@ -8,6 +8,7 @@ django-extensions
 djangorestframework
 
 django-heroku
+whitenoise
 
 gunicorn
 
