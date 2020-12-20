@@ -44,8 +44,8 @@
         };
 
         dataSocket.onerror = function(e) {
-            theError = e;
-            console.log('[ERROR] ' + e)
+            console.log('[ERROR] Failed to connect to data socket');
+            console.log(e);
         };
 
         dataSocket.onclose = function(e) {
