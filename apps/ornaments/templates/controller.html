@@ -95,11 +95,17 @@
             background-color: #BDE8EF;
             color: #FFD4E5;
         }
+
+        .logs {
+            max-width: 1200px;
+            text-align: left;
+        }
     </style>
 
 </head>
 <body>
     <div class="container">
+        <h2>{{ nickname }}</h2>
         <div class="brightness">
             <h2>Brightness: <span id="brightnessDisplay">50</span>%</h2>
             <div class="brightnessSlider">
@@ -122,6 +128,15 @@
             <button id="emas">
                 <i class="fa fa-egg"></i>
             </button>
+        </div>
+
+        <div class="logs">
+            <h3>Logs</h3>
+            {% for log in logs %}
+                <dt>{{ log.created }}</dt>
+                <dd>{{ log.message }}</dd>
+            {%  endfor %}
+
         </div>
     </div>
 
