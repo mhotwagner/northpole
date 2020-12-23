@@ -133,7 +133,7 @@
         <div class="logs">
             <h3>Logs</h3>
             {% for log in logs %}
-                <dt>{{ log.created }}</dt>
+                <dt>{{ log.created|date:"c" }}</dt>
                 <dd>{{ log.message }}</dd>
             {%  endfor %}
 
