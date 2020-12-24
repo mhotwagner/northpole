@@ -28,7 +28,7 @@ def controller_view(request, mac_address):
 
 def controller_nickname_view(request, nickname):
     ornament = get_object_or_404(OrnamentDevice, nickname=nickname)
-    ornament_logs = ornament.logs.all().order_by('-created')
+    ornament_logs = ornament.logs.all().order_by('-created')[:100]
     context = {
         'mac_address': ornament.mac_address,
         'nickname': nickname,
