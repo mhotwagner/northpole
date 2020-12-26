@@ -127,7 +127,10 @@
                 </strong>
             </button>
             <button id="emas">
-                <i class="fa fa-egg"></i>
+                <i class="fa fa-sun"></i>
+            </button>
+            <button id="breathingRainbow">
+                <i class="fa fa-raingbow"></i>
             </button>
         </div>
 
@@ -238,6 +241,13 @@
             }));
         });
 
+        $('#breathingRainbow').on('click', function() {
+            dataSocket.send(JSON.stringify({
+                data: {
+                    breathingRainbow: true,
+                }
+            }));
+        });
 
     </script>
 </body>
