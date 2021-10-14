@@ -13,7 +13,7 @@ RUN pip3 install -r requirements.txt
 #RUN apk del -r python3-dev postgresql
 
 # Enable bash on heroku exec
-RUN apt-get update && apt-get install bash curl openssh iproute2
+RUN apt-get update && apt-get install bash curl openssh-server iproute2
 ADD deploy/.profile.d /app/.profile.d
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
