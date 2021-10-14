@@ -14,7 +14,7 @@ RUN pip3 install -r requirements.txt
 
 # Enable bash on heroku exec
 RUN apk add bash curl openssh iproute2
-COPY deploy/.profile.d/heroku-exec.sh /app/.profile.d/
+ADD deploy/.profile.d /app/.profile.d
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 ENV PYTHONUNBUFFERED 1
