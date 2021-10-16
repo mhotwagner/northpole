@@ -7,6 +7,7 @@ from .models import Log
 
 @admin.register(Log)
 class LogAdmin(admin.ModelAdmin):
+    list_display = ('created', 'ornament', 'message')
     fields = (('ornament',),
               ('message',),)
 
